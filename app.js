@@ -9,8 +9,17 @@ if (process.env.NODE_ENV !== 'test') {
     mongoose.connect('mongodb://localhost/muber');
 }
 
-
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // middleware
 routes(app);
+
+/* @err defined if previous mdw threw an err
+ * @req incoming request
+ * @res outgoing response
+ * @next pass control flow to next mdw chain
+ */
+app.use((err, req, res, next) => {
+    // status 422 - validation error
+    res.status(422).send({ error: err.message });
+});
 
 module.exports = app;
