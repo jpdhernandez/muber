@@ -7,4 +7,8 @@ module.exports = (app) => {
     app.get('/api', DriversController.greeting);
 
     app.post('/api/drivers', DriversController.create);
+
+    // match any route with a put request of any id
+    app.put('/api/drivers/:id', DriversController.edit);
+
 };

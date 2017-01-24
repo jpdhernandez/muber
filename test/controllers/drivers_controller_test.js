@@ -20,4 +20,24 @@ describe('Drivers cotnroller', () => {
                 });
         });
     });
+
+    it('PUT to /api/drivers/id edits an existing driver', done => {
+        // create the driver, edit the driver, pull out the driver that was updated
+        const driver = new Driver({ email: 't@t.com', driving: false })
+
+        // use supertest to make a PUT request
+        driver.save().then(() => {
+            request(app)
+                .put(`/api/drivers/${driver._id}`)
+                .send({ driving: true }) // send the update
+                .end(() => {
+                    Driver.findOne({ email: 't@t.com' })
+                        .then(driver => {
+                            assert(driver.driving === true);
+                            done();
+                        });
+                })
+        });
+    });
+
 });
