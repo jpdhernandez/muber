@@ -11,4 +11,6 @@ module.exports = (app) => {
     // match any route with a put request of any id
     app.put('/api/drivers/:id', DriversController.edit);
 
+    app.delete('/api/drivers/:id', DriversController.delete);
+
 };

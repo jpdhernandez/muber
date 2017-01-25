@@ -40,4 +40,21 @@ describe('Drivers cotnroller', () => {
         });
     });
 
+    it('DELETE to /api/drivers/id deletes an existing driver', done => {
+        const driver = new Driver({ email: 't@t.com', driving: false })
+
+        driver.save().then(() => {
+            request(app)
+                .delete(`/api/drivers/${driver._id}`)
+                .send(`driver with email ${driver.email} deleted`) // send the update
+                .end(() => {
+                    Driver.findOne({ email: 't@t.com' })
+                        .then(driver => {
+                            assert(driver === null);
+                            done();
+                        });
+                })
+        });
+    });
+
 });
