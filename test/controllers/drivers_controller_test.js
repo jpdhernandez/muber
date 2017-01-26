@@ -57,4 +57,28 @@ describe('Drivers cotnroller', () => {
         });
     });
 
+    it('GET to /api/drivers/ finds drivers in a location', done => {
+        const torontoDriver = new Driver({
+            email: 'to@test.com',
+            geometry: { type: 'Point', coordinates: [-79, 43] }
+        });
+
+        const californiaDriver = new Driver({
+            email: 'ca@test.com',
+            geometry: { type: 'Point', coordinates: [-122, 37] }
+        });
+
+        Promise.all([torontoDriver.save(), californiaDriver.save()])
+            .then(() => {
+                request(app)
+                    .get('/api/drivers?lng=-79&lat=43')
+                    .end((err, res) => {
+                        // assert(response.body.length === 1);
+                        // assert(response.body[0].obj.email === 'to@test.com')
+                        console.log(res);
+                        done();
+                    })
+            })
+
+    })
 });
