@@ -2,8 +2,6 @@ const assert = require('assert');
 const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../../app');
-
-
 const Driver = mongoose.model('driver');
 
 describe('Drivers cotnroller', () => {
@@ -73,8 +71,8 @@ describe('Drivers cotnroller', () => {
                 request(app)
                     .get('/api/drivers?lng=-79&lat=43')
                     .end((err, res) => {
-                        // assert(response.body.length === 1);
-                        // assert(response.body[0].obj.email === 'to@test.com')
+                        assert(res.body.length === 1);
+                        assert(res.body[0].obj.email === 'to@test.com')
                         console.log(res);
                         done();
                     })

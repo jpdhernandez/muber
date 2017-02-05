@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 before(done => {
-    mongoose.createConnection('mongodb://localhost/muber_test');
+    mongoose.connect('mongodb://localhost/muber_test');
     mongoose.connection
         .once('open', () => done())
         .on('error', err => {
@@ -15,4 +15,4 @@ beforeEach(done => {
         .then(() => drivers.ensureIndex({ 'geomertry.coordinates': '2dsphere' }))
         .then(() => done())
         .catch(() => done());
-})
+});
