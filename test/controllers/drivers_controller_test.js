@@ -34,7 +34,7 @@ describe('Drivers cotnroller', () => {
                             assert(driver.driving === true);
                             done();
                         });
-                })
+                });
         });
     });
 
@@ -51,7 +51,7 @@ describe('Drivers cotnroller', () => {
                             assert(driver === null);
                             done();
                         });
-                })
+                });
         });
     });
 
@@ -72,11 +72,9 @@ describe('Drivers cotnroller', () => {
                     .get('/api/drivers?lng=-79&lat=43')
                     .end((err, res) => {
                         assert(res.body.length === 1);
-                        assert(res.body[0].obj.email === 'to@test.com')
-                        console.log(res);
+                        assert(res.body[0].obj.email === 'to@test.com');
                         done();
-                    })
-            })
-
-    })
+                    });
+            });
+    });
 });
